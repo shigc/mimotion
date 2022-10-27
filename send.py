@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 # python >=3.8
-import requests,json,time,random
+import requests,json,time,random,os
 corpid = os.environ.get("corpid")
 corpsecret = os.environ.get("corpsecret")
 tgbotoken = os.environ.get("tgbotoken")
