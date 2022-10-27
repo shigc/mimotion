@@ -3,31 +3,8 @@
  
 import requests,time,re,json,random, send
 import os
- 
 
- 
-def telegram_bot(title, content):
-    print("\n")
-    tg_bot_token = TG_BOT_TOKEN
-    tg_user_id = TG_USER_ID
-    if "TG_BOT_TOKEN" in os.environ and "TG_USER_ID" in os.environ:
-        tg_bot_token = os.environ["TG_BOT_TOKEN"]
-        tg_user_id = os.environ["TG_USER_ID"]
-    if not tg_bot_token or not tg_user_id:
-        print("Telegram推送的tg_bot_token或者tg_user_id未设置!!\n取消推送")
-        return
-    print("Telegram 推送开始")
-    send_data = {"chat_id": tg_user_id, "text": title +
-                 '\n\n'+content, "disable_web_page_preview": "true"}
-    response = requests.post(
-        url='https://api.telegram.org/bot%s/sendMessage' % (tg_bot_token), data=send_data)
-    print(response.text)
- 
-now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-headers = {
-        'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'
-        }
-  
+
 #获取登录code
 def get_code(location):
     code_pattern = re.compile("(?<=access=).*?(?=&)")
@@ -176,27 +153,7 @@ def qywx(msg):
 		 
 	print("推鬼知道修改成功没")
 		
-## 推送QQ
-def push_qq(msg):
-    """
-    推送消息到QQ酷推
-    """
-    if key == '':
-        print("[注意] 未提供key，不进行推送！")
-    else:
-        server_url = f"https://push.xuthus.cc/send/{key}?"
-        params = {
-             "c": msg
-        }
-      
-        response = requests.get(server_url, params=params)
-        json_data = response.json()
-        if json_data['reason'] == "操作成功":
-            print(f"推送成功")
-        else:
-            print(f" 推送失败:鬼知道哪错了")
-     
-        print("QQ酷推鬼知道修改成功没")    
+
 # 推送server
 def push_wx(msg):
     """
